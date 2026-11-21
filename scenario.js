@@ -202,7 +202,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 違和感",
-        text: "AM11:40 センター街\n老人は食後の散歩に出た。\nセンター街は、渋谷の中でも特に若者の街だ。若者の街からは若者のエネルギーが吸収できる。老人はそう信じていた。老人には若いエネルギーを補給しておく必要があった。\n街は若者で溢れていた。若者たちはどれもこれも同じ顔に見えた。\n彼らの年頃、老人は国から人の命を奪うことを命じられた。",
+        text: "<SE 雑路>AM11:40 センター街\n老人は食後の散歩に出た。\nセンター街は、渋谷の中でも特に若者の街だ。若者の街からは若者のエネルギーが吸収できる。老人はそう信じていた。老人には若いエネルギーを補給しておく必要があった。\n街は若者で溢れていた。若者たちはどれもこれも同じ顔に見えた。\n彼らの年頃、老人は国から人の命を奪うことを命じられた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100080.png",
         bgm: "https://actions.google.com/sounds/v1/ambiences/night_club_in_the_distance.ogg"
