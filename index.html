@@ -603,7 +603,21 @@
             visibleChunkCount = 1;
         }
 
-        function restartPanAnimation() {
+        function isScrollDisabled(scene) {
+            return Boolean(scene && scene.scroll === "none");
+        }
+
+        function stopPanAnimation() {
+            bgContainer.classList.remove("panning");
+            bgContainer.style.transform = "translateX(0px)";
+        }
+
+        function restartPanAnimation(scene = null) {
+            if (isScrollDisabled(scene)) {
+                stopPanAnimation();
+                return;
+            }
+            bgContainer.style.transform = "";
             bgContainer.classList.remove("panning");
             void bgContainer.offsetWidth;
             bgContainer.classList.add("panning");
@@ -638,23 +652,29 @@
                     }
                     bgVideo.style.display = "block";
                     bgVideo.play().catch(() => {});
-                    restartPanAnimation();
+                    restartPanAnimation(scene);
                 } else if (scene.bgType === "image" && scene.bgValue) {
                     bgVideo.style.display = "none";
                     bgVideo.pause();
                     bgContainer.style.background = "";
                     bgContainer.style.backgroundImage = `url('${scene.bgValue}')`;
-                    restartPanAnimation();
+                    restartPanAnimation(scene);
                 } else {
                     bgVideo.style.display = "none";
                     bgVideo.pause();
-                    bgContainer.classList.remove("panning");
+                    stopPanAnimation();
                     bgContainer.style.backgroundImage = "none";
                     bgContainer.style.background = scene.bgValue || "#0b0b0b";
                 }
 
                 lastBgType = scene.bgType;
                 lastBgValue = scene.bgValue;
+            } else if (scene.bgType === "image" || scene.bgType === "video") {
+                if (isScrollDisabled(scene)) {
+                    stopPanAnimation();
+                } else if (!bgContainer.classList.contains("panning")) {
+                    restartPanAnimation(scene);
+                }
             }
 
             const targetBgm = scene.bgm || "";

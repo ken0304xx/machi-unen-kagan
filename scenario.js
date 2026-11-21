@@ -313,6 +313,7 @@ const SCENARIO = [
         text: "",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100220.png",
+        scroll: "none",
         bgm: ""
     }
 ];
