@@ -1,10 +1,10 @@
 const SE_DICT = {
-    "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/ashioto.mp3",
-    "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/zatsuro.mp3",
+    "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/ashioto.mp3",
+    "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/zatsuro.mp3",
 };
 
 const BGM_DICT = {
-    "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
+    "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3"
 };
 
 const TIPS_DICT = {
@@ -156,21 +156,21 @@ const SCENARIO = [
         text: "10月11日\nAM10:00 代々木公園周辺\nこの街にも秋が訪れようとしている。\n「もあい……天気晴朗」\n老人は小さなあくびを一つもらした。\n十月の空は青く、風は軽かった。\n老人は代々木公園のベンチに寝そべって雲を見ている。\n着ているものは、よく洗濯されてはいるが、着古した長袖シャツに、ジャンパー、ジーパンと、デニムの三点セットだ。\n白くて柔らかな髪とヒゲが、老人のワニのような顔を、ふんわりと包んでいた。\n「[[白雲蒼狗]]」\n老人は地に墜ちた雲だった。\n「うムム、[[光陰流転]]」\n晩秋の青空を流れる雲脚は速い。\n「天上風速」\n老人はもっさりと起き上がった。\n「ふわ、もあああい……！」\n老人は存分に手足を伸ばして、大好きな大あくびをした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100011.png", 
-        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3" 
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3" 
     },
     {
         chapter: "PROLOGUE - 依頼",
         text: "「あの……」\nそのとき、緑の風が吹きぬけた。\n「お隣、よろしゅうございましょうか？」\n上品な声というものはあるものだ。\n育ちのよさそうな[[老貴婦人]]が、白い日傘をさして立っている。ベンチへ座って、読書をしたいということらしい。\n「さ、[[才子佳人]]……」\n老人は呻いた。\n美しく老いた文学少女というところか。小脇に数冊の本を抱えた老貴婦人は、はにかんだように会釈した。\n「あ……[[合縁奇縁]]」\n老人は礼儀正しく立ち上がった。\n「[[仙姿玉質]]。[[一期一会]]」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100021.png",
-        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3"
     },
     {
         chapter: "PROLOGUE - 取引",
         text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n<se 足跡>一礼して、老人は貴婦人に背を向けた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100031.png",
-        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3"
     },
     {
         chapter: "PROLOGUE - 違和感",
