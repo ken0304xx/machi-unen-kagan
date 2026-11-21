@@ -245,14 +245,14 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。",
+        text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。\nバクハ予告。\nまださっきの二人の会話がひっかかっている。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "バクハ予告。\nまださっきの二人の会話がひっかかっている。\nいまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\nサーッ、ドカーン。これで何十人が死んだ。\nサーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
+        text: "いまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\nサーッ、ドカーン。これで何十人が死んだ。\nサーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/mugon.mp3"
