@@ -207,7 +207,7 @@
             cursor: default;
         }
 
-        /* 暗転＋薄緑文字のTIPS表示（上詰め） */
+        /* 暗転＋薄緑文字のTIPS表示（通常テキストと同じ幅・余白・上詰め） */
         #tips-modal {
             display: none;
             position: fixed;
@@ -219,7 +219,7 @@
             z-index: 10;
             align-items: flex-start;
             justify-content: center;
-            padding: 36px 28px 24px;
+            padding: 18px 24px;
             overflow-y: auto;
             cursor: pointer;
         }
@@ -228,8 +228,9 @@
             border: none;
             box-shadow: none;
             width: 100%;
-            max-width: 900px;
-            padding: 8px 16px;
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0;
         }
         #tips-title {
             font-size: clamp(24px, 4.4vh, 44px);
@@ -470,7 +471,7 @@
 
         function appendPageTurnIconToText(rawText) {
             const cleanText = stripAudioTags(rawText);
-            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">📄</span>`;
+            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">\u{1F4C4}</span>`;
             const trailingNewlinesMatch = cleanText.match(/\n+$/);
             if (trailingNewlinesMatch) {
                 const head = cleanText.slice(0, cleanText.length - trailingNewlinesMatch[0].length);
