@@ -277,7 +277,7 @@
             </div>
         </div>
 
-        <button class="side-nav-btn" id="next-btn" onclick="nextPage()">進む</button>
+        <button class="side-nav-btn" id="next-btn">進む</button>
     </div>
 
     <div id="tips-modal" onclick="closeTips()">
@@ -306,6 +306,7 @@
         const bgContainer = document.getElementById("bg-container");
         const bgVideo = document.getElementById("bg-video");
         const bgmPlayer = document.getElementById("bgm-player");
+        bgmPlayer.loop = true;
         bgmPlayer.volume = 1.0;
 
         const appEl = document.getElementById("app");
@@ -338,6 +339,7 @@
 
             currentBgmSrc = targetSrc;
             bgmPlayer.pause();
+            bgmPlayer.loop = true;
             bgmPlayer.src = currentBgmSrc;
             bgmPlayer.currentTime = 0;
             bgmPlayer.volume = 1.0;
@@ -352,15 +354,30 @@
             }
         }
 
+        const activeSeBySrc = new Map();
+
         function playSe(seName) {
             if (!isSoundOn || !seName) return;
             const dict = (typeof SE_DICT !== "undefined") ? SE_DICT : {};
             const src = dict[seName] || seName;
             if (!src) return;
 
-            // 前のSEを止めず、新しいインスタンスを生成して重ね再生する
+            // 同一音源が再生終了済みなら先頭から再生し、再生中なら重ね再生する
+            const existing = activeSeBySrc.get(src);
+            if (existing && existing.ended) {
+                existing.currentTime = 0;
+                existing.volume = 1.0;
+                existing.play().catch(() => {});
+                return;
+            }
+
             const seAudio = new Audio(src);
+            seAudio.loop = false;
             seAudio.volume = 1.0;
+            activeSeBySrc.set(src, seAudio);
+            seAudio.addEventListener("ended", () => {
+                seAudio.currentTime = 0;
+            });
             seAudio.play().catch(() => {});
         }
 
@@ -450,7 +467,7 @@
 
         function appendPageTurnIconToText(rawText) {
             const cleanText = stripAudioTags(rawText);
-            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">\u{1F4C4}</span>`;
+            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">📄</span>`;
             const trailingNewlinesMatch = cleanText.match(/\n+$/);
             if (trailingNewlinesMatch) {
                 const head = cleanText.slice(0, cleanText.length - trailingNewlinesMatch[0].length);
@@ -768,6 +785,91 @@
         }
 
         document.addEventListener("pointerdown", ensureBgmPlaying, { once: true });
+
+        // 「進む」ボタン長押しによる早送り制御
+        const HOLD_DELAY_MS = 350;
+        const FAST_FORWARD_INTERVAL_MS = 120;
+        let holdStartTimer = null;
+        let fastForwardTimer = null;
+        let isFastForwarding = false;
+        let suppressNextClick = false;
+
+        function canAdvanceNext() {
+            if (isTipsOpen()) return true;
+            const page = displayPages[currentDisplayPageIndex];
+            if (!page) return false;
+            const isAtVeryEnd = (
+                currentDisplayPageIndex === displayPages.length - 1 &&
+                visibleChunkCount >= page.chunks.length
+            );
+            return !isAtVeryEnd;
+        }
+
+        function clearFastForwardTimers() {
+            if (holdStartTimer !== null) {
+                clearTimeout(holdStartTimer);
+                holdStartTimer = null;
+            }
+            if (fastForwardTimer !== null) {
+                clearInterval(fastForwardTimer);
+                fastForwardTimer = null;
+            }
+            isFastForwarding = false;
+        }
+
+        function startFastForwardLoop() {
+            if (fastForwardTimer !== null) return;
+            isFastForwarding = true;
+            suppressNextClick = true;
+
+            fastForwardTimer = setInterval(() => {
+                if (nextBtn.disabled || !canAdvanceNext()) {
+                    stopFastForward();
+                    return;
+                }
+                nextPage();
+            }, FAST_FORWARD_INTERVAL_MS);
+        }
+
+        function stopFastForward() {
+            const wasFastForwarding = isFastForwarding;
+            clearFastForwardTimers();
+            if (wasFastForwarding) {
+                setTimeout(() => {
+                    suppressNextClick = false;
+                }, 0);
+            }
+        }
+
+        nextBtn.addEventListener("pointerdown", (e) => {
+            if (e.button !== undefined && e.button !== 0) return;
+            if (nextBtn.disabled || !canAdvanceNext()) return;
+
+            suppressNextClick = false;
+            clearFastForwardTimers();
+
+            holdStartTimer = setTimeout(() => {
+                if (!nextBtn.disabled && canAdvanceNext()) {
+                    startFastForwardLoop();
+                }
+            }, HOLD_DELAY_MS);
+        });
+
+        nextBtn.addEventListener("click", (e) => {
+            if (suppressNextClick) {
+                e.preventDefault();
+                suppressNextClick = false;
+                return;
+            }
+            nextPage();
+        });
+
+        ["pointerup", "pointercancel", "pointerleave"].forEach((evName) => {
+            nextBtn.addEventListener(evName, stopFastForward);
+        });
+        window.addEventListener("pointerup", stopFastForward);
+        window.addEventListener("pointercancel", stopFastForward);
+        window.addEventListener("blur", stopFastForward);
 
         window.addEventListener("load", () => {
             nudgeAddressBar();
