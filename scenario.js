@@ -11,7 +11,8 @@ const BGM_DICT = {
     "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3",
     "もあい": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3",
     "一途な想い": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3",
-    "鳥の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
+    "鳥の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3",
+    "無言の圧力": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/mugon.mp3"
 };
 
 const TIPS_DICT = {
@@ -244,18 +245,24 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。\nバクハ予告。\nまださっきの二人の会話がひっかかっている。\nいまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\n<SE 爆発音>サーッ、ドカーン。これで何十人が死んだ。\n<SE 爆発音>サーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
+        text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
+        text: "バクハ予告。\nまださっきの二人の会話がひっかかっている。\nいまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\nサーッ、ドカーン。これで何十人が死んだ。\nサーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
+        bgType: "image",
+        bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/mugon.mp3"
+    },
+    {
+        chapter: "PROLOGUE - 幕開け",
         text: "顔を上げると、学生風の二人が何やら映画論を戦わせていた。\n「[[生々流転]]」\n老人もむかし、学問を志したことがあった。\nだが、貧しい農家の七人兄弟の長男坊では、それもならず、野良仕事の合間に弟妹の面倒を見ているうち、戦争にとられた。\nちょうど彼らの年頃だった。\n「[[暴虐非道]]」\n人間はどこまでも醜く、残忍になれるものだということを、老人は彼の地で知った。\n遠い、南京という都市だ。\n五年間で、老人は三百八十余人の敵を殺した。もう六十年も昔の話だ。\n「[[行雲流水]]」\n老人は流れる雲を見つめた。\n誰かが泣いている。\n「もあい……誰だ？」\n老人は身を起こした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100136.png",
-        scroll: "none",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/mugon.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
