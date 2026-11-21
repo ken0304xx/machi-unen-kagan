@@ -322,22 +322,21 @@
             return tipsModalEl.style.display === "flex";
         }
 
-        function setBgmSource(targetSrc, { forceRestart = false } = {}) {
+        const BGM_FADE_OUT_MS = 600;
+        const BGM_FADE_STEP_MS = 30;
+        let bgmFadeTimer = null;
+        let pendingBgmTransitionId = 0;
+
+        function clearBgmFadeTimer() {
+            if (bgmFadeTimer !== null) {
+                clearInterval(bgmFadeTimer);
+                bgmFadeTimer = null;
+            }
+        }
+
+        function startNewBgmImmediate(targetSrc, transitionId) {
             if (!isSoundOn) return;
-
-            if (!targetSrc) {
-                if (currentBgmSrc !== "" || !bgmPlayer.paused) {
-                    currentBgmSrc = "";
-                    bgmPlayer.pause();
-                    bgmPlayer.removeAttribute("src");
-                }
-                return;
-            }
-
-            if (targetSrc === currentBgmSrc && !forceRestart) {
-                ensureBgmPlaying();
-                return;
-            }
+            if (transitionId !== pendingBgmTransitionId) return;
 
             currentBgmSrc = targetSrc;
             bgmPlayer.pause();
@@ -348,9 +347,95 @@
             bgmPlayer.play().catch(() => {});
         }
 
+        function stopBgmImmediate(transitionId) {
+            if (transitionId !== pendingBgmTransitionId) return;
+            currentBgmSrc = "";
+            bgmPlayer.pause();
+            bgmPlayer.removeAttribute("src");
+            bgmPlayer.volume = 1.0;
+        }
+
+        function fadeOutAndSwitchBgm(targetSrc) {
+            const transitionId = ++pendingBgmTransitionId;
+            clearBgmFadeTimer();
+
+            const canFadeCurrent =
+                currentBgmSrc !== "" &&
+                !bgmPlayer.paused &&
+                bgmPlayer.volume > 0.01;
+
+            if (!canFadeCurrent) {
+                if (!targetSrc) {
+                    stopBgmImmediate(transitionId);
+                } else {
+                    startNewBgmImmediate(targetSrc, transitionId);
+                }
+                return;
+            }
+
+            const startVolume = bgmPlayer.volume;
+            const totalSteps = Math.max(1, Math.round(BGM_FADE_OUT_MS / BGM_FADE_STEP_MS));
+            let step = 0;
+
+            bgmFadeTimer = setInterval(() => {
+                if (transitionId !== pendingBgmTransitionId) {
+                    clearBgmFadeTimer();
+                    return;
+                }
+                step++;
+                const ratio = Math.max(0, 1 - step / totalSteps);
+                bgmPlayer.volume = startVolume * ratio;
+
+                if (step >= totalSteps) {
+                    clearBgmFadeTimer();
+                    if (!targetSrc) {
+                        stopBgmImmediate(transitionId);
+                    } else {
+                        startNewBgmImmediate(targetSrc, transitionId);
+                    }
+                }
+            }, BGM_FADE_STEP_MS);
+        }
+
+        function setBgmSource(targetSrc, { forceRestart = false } = {}) {
+            if (!isSoundOn) return;
+
+            if (!targetSrc) {
+                if (currentBgmSrc !== "" || !bgmPlayer.paused) {
+                    fadeOutAndSwitchBgm("");
+                } else {
+                    pendingBgmTransitionId++;
+                    clearBgmFadeTimer();
+                    currentBgmSrc = "";
+                }
+                return;
+            }
+
+            if (targetSrc === currentBgmSrc && !forceRestart) {
+                if (bgmFadeTimer !== null) {
+                    pendingBgmTransitionId++;
+                    clearBgmFadeTimer();
+                    bgmPlayer.volume = 1.0;
+                }
+                ensureBgmPlaying();
+                return;
+            }
+
+            if (targetSrc === currentBgmSrc && forceRestart) {
+                pendingBgmTransitionId++;
+                clearBgmFadeTimer();
+                startNewBgmImmediate(targetSrc, pendingBgmTransitionId);
+                return;
+            }
+
+            fadeOutAndSwitchBgm(targetSrc);
+        }
+
         function ensureBgmPlaying() {
             if (!isSoundOn || !currentBgmSrc) return;
-            bgmPlayer.volume = 1.0;
+            if (bgmFadeTimer === null) {
+                bgmPlayer.volume = 1.0;
+            }
             if (bgmPlayer.paused) {
                 bgmPlayer.play().catch(() => {});
             }
@@ -472,7 +557,7 @@
 
         function appendPageTurnIconToText(rawText) {
             const cleanText = stripAudioTags(rawText);
-            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">\u{1F4C4}</span>`;
+            const iconHtml = `<span class="page-turn-icon" aria-hidden="true">📄</span>`;
             const trailingNewlinesMatch = cleanText.match(/\n+$/);
             if (trailingNewlinesMatch) {
                 const head = cleanText.slice(0, cleanText.length - trailingNewlinesMatch[0].length);
