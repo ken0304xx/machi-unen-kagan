@@ -300,6 +300,9 @@
         let lastBgType = "";
         let lastBgValue = "";
 
+        // ページ内チャンク単位の発火済み管理（キー: `${pageIndex}:${chunkIndex}`）
+        const triggeredChunkKeys = new Set();
+
         const bgContainer = document.getElementById("bg-container");
         const bgVideo = document.getElementById("bg-video");
         const bgmPlayer = document.getElementById("bgm-player");
@@ -316,11 +319,116 @@
             return tipsModalEl.style.display === "flex";
         }
 
+        function setBgmSource(targetSrc, { forceRestart = false } = {}) {
+            if (!isSoundOn) return;
+
+            if (!targetSrc) {
+                if (currentBgmSrc !== "" || !bgmPlayer.paused) {
+                    currentBgmSrc = "";
+                    bgmPlayer.pause();
+                    bgmPlayer.removeAttribute("src");
+                }
+                return;
+            }
+
+            if (targetSrc === currentBgmSrc && !forceRestart) {
+                ensureBgmPlaying();
+                return;
+            }
+
+            currentBgmSrc = targetSrc;
+            bgmPlayer.pause();
+            bgmPlayer.src = currentBgmSrc;
+            bgmPlayer.currentTime = 0;
+            bgmPlayer.volume = 1.0;
+            bgmPlayer.play().catch(() => {});
+        }
+
         function ensureBgmPlaying() {
             if (!isSoundOn || !currentBgmSrc) return;
             bgmPlayer.volume = 1.0;
             if (bgmPlayer.paused) {
                 bgmPlayer.play().catch(() => {});
+            }
+        }
+
+        function playSe(seName) {
+            if (!isSoundOn || !seName) return;
+            const dict = (typeof SE_DICT !== "undefined") ? SE_DICT : {};
+            const src = dict[seName] || seName;
+            if (!src) return;
+
+            // 前のSEを止めず、新しいインスタンスを生成して重ね再生する
+            const seAudio = new Audio(src);
+            seAudio.volume = 1.0;
+            seAudio.play().catch(() => {});
+        }
+
+        function applyBgmTag(bgmName) {
+            if (!isSoundOn) return;
+            const trimmed = (bgmName || "").trim();
+
+            if (!trimmed) {
+                setBgmSource("", { forceRestart: true });
+                return;
+            }
+
+            const dict = (typeof BGM_DICT !== "undefined") ? BGM_DICT : {};
+            const src = dict[trimmed] || trimmed;
+            if (!src) return;
+
+            setBgmSource(src, { forceRestart: true });
+        }
+
+        function extractAudioTags(rawText) {
+            const tags = [];
+            if (!rawText) return tags;
+
+            const regex = /<(se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi;
+            let match;
+            while ((match = regex.exec(rawText)) !== null) {
+                const inner = match[1].trim();
+                if (/^se\b/i.test(inner)) {
+                    const name = inner.replace(/^se\s*/i, "").trim();
+                    if (name) {
+                        tags.push({ type: "se", name });
+                    }
+                } else if (/^bgm\b/i.test(inner)) {
+                    const name = inner.replace(/^bgm\s*/i, "").trim();
+                    tags.push({ type: "bgm", name });
+                }
+            }
+            return tags;
+        }
+
+        function stripAudioTags(rawText) {
+            if (!rawText) return "";
+            return rawText.replace(/<(se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "");
+        }
+
+        function executeTagsInChunk(rawChunkText) {
+            const tags = extractAudioTags(rawChunkText);
+            if (tags.length === 0) return;
+
+            // SEとBGMは同時再生可能なので並行実行
+            tags.forEach((tag) => {
+                if (tag.type === "se") {
+                    playSe(tag.name);
+                } else if (tag.type === "bgm") {
+                    applyBgmTag(tag.name);
+                }
+            });
+        }
+
+        function triggerNewlyVisibleChunks(pageIndex, fromCount, toCount) {
+            const page = displayPages[pageIndex];
+            if (!page) return;
+
+            for (let idx = fromCount; idx < toCount; idx++) {
+                const key = `${pageIndex}:${idx}`;
+                if (triggeredChunkKeys.has(key)) continue;
+                triggeredChunkKeys.add(key);
+                executeTagsInChunk(page.chunks[idx] || "");
             }
         }
 
@@ -333,29 +441,31 @@
         }
 
         function formatTipsHtml(rawText) {
-            return rawText.replace(/\[\[(.*?)(?:\|(.*?))?\]\]/g, (match, key, label) => {
+            const cleanText = stripAudioTags(rawText);
+            return cleanText.replace(/\[\[(.*?)(?:\|(.*?))?\]\]/g, (match, key, label) => {
                 const displayLabel = label || key;
                 return `<span class="tips-word" onclick="openTips('${key}')">${displayLabel}</span>`;
             });
         }
 
         function appendPageTurnIconToText(rawText) {
+            const cleanText = stripAudioTags(rawText);
             const iconHtml = `<span class="page-turn-icon" aria-hidden="true">\u{1F4C4}</span>`;
-            const trailingNewlinesMatch = rawText.match(/\n+$/);
+            const trailingNewlinesMatch = cleanText.match(/\n+$/);
             if (trailingNewlinesMatch) {
-                const head = rawText.slice(0, rawText.length - trailingNewlinesMatch[0].length);
+                const head = cleanText.slice(0, cleanText.length - trailingNewlinesMatch[0].length);
                 return `${formatTipsHtml(head)}${iconHtml}${trailingNewlinesMatch[0]}`;
             }
-            return `${formatTipsHtml(rawText)}${iconHtml}`;
+            return `${formatTipsHtml(cleanText)}${iconHtml}`;
         }
 
         function splitTextIntoChunks(rawText) {
             if (!rawText) return [];
 
             const protectedRanges = [];
-            const bracketRegex = /\[\[.*?\]\]/g;
+            const protectRegex = /(\[\[.*?\]\]|<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>)/gi;
             let bMatch;
-            while ((bMatch = bracketRegex.exec(rawText)) !== null) {
+            while ((bMatch = protectRegex.exec(rawText)) !== null) {
                 protectedRanges.push({
                     start: bMatch.index,
                     end: bMatch.index + bMatch[0].length
@@ -400,7 +510,7 @@
                         }
 
                         const piece = rawText.slice(start, end);
-                        if (piece.replace(/\s+/g, "").length > 0) {
+                        if (piece.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 || extractAudioTags(piece).length > 0) {
                             chunks.push(piece);
                         }
                         start = end;
@@ -413,7 +523,7 @@
 
             if (start < rawText.length) {
                 const tail = rawText.slice(start);
-                if (tail.replace(/\s+/g, "").length > 0) {
+                if (tail.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 || extractAudioTags(tail).length > 0) {
                     chunks.push(tail);
                 }
             }
@@ -464,6 +574,7 @@
             textScreenEl.style.overflowY = prevOverflowY;
 
             displayPages = pages;
+            triggeredChunkKeys.clear();
 
             const targetIndex = displayPages.findIndex(p => p.sceneIndex === preserveSceneIndex);
             currentDisplayPageIndex = targetIndex >= 0 ? targetIndex : 0;
@@ -493,7 +604,7 @@
             }
         }
 
-        function applySceneMedia(scene) {
+        function applySceneMedia(scene, { restoreSceneBgm = false } = {}) {
             const isSameBg = (scene.bgType === lastBgType && scene.bgValue === lastBgValue);
 
             if (!isSameBg) {
@@ -524,22 +635,22 @@
                 lastBgValue = scene.bgValue;
             }
 
-            if (scene.bgm !== currentBgmSrc) {
-                currentBgmSrc = scene.bgm;
-                if (currentBgmSrc) {
-                    bgmPlayer.src = currentBgmSrc;
-                    bgmPlayer.volume = 1.0;
-                    bgmPlayer.play().catch(() => {});
-                } else {
-                    bgmPlayer.pause();
-                    bgmPlayer.removeAttribute("src");
+            const targetBgm = scene.bgm || "";
+            if (restoreSceneBgm) {
+                // 「戻る」操作時: 現在再生中がSCENARIO定義と異なれば最初から再生、同じなら継続
+                if (targetBgm !== currentBgmSrc) {
+                    setBgmSource(targetBgm, { forceRestart: true });
+                } else if (currentBgmSrc) {
+                    ensureBgmPlaying();
                 }
+            } else if (targetBgm !== currentBgmSrc) {
+                setBgmSource(targetBgm, { forceRestart: false });
             } else if (currentBgmSrc) {
                 ensureBgmPlaying();
             }
         }
 
-        function loadDisplayPage(pageIndex, startAtFirstChunk = true) {
+        function loadDisplayPage(pageIndex, startAtFirstChunk = true, { fromBack = false } = {}) {
             if (pageIndex < 0 || pageIndex >= displayPages.length) return;
             currentDisplayPageIndex = pageIndex;
 
@@ -549,7 +660,15 @@
             visibleChunkCount = startAtFirstChunk ? 1 : page.chunks.length;
 
             renderCurrentChunks();
-            applySceneMedia(scene);
+            applySceneMedia(scene, { restoreSceneBgm: fromBack });
+
+            if (!fromBack) {
+                triggerNewlyVisibleChunks(currentDisplayPageIndex, 0, visibleChunkCount);
+            } else {
+                const key = `${currentDisplayPageIndex}:0`;
+                triggeredChunkKeys.add(key);
+            }
+
             updateNavButtons();
         }
 
@@ -575,11 +694,13 @@
             if (!page) return;
 
             if (visibleChunkCount < page.chunks.length) {
+                const prevCount = visibleChunkCount;
                 visibleChunkCount++;
                 renderCurrentChunks();
+                triggerNewlyVisibleChunks(currentDisplayPageIndex, prevCount, visibleChunkCount);
                 updateNavButtons();
             } else if (currentDisplayPageIndex < displayPages.length - 1) {
-                loadDisplayPage(currentDisplayPageIndex + 1, true);
+                loadDisplayPage(currentDisplayPageIndex + 1, true, { fromBack: false });
             }
         }
 
@@ -593,10 +714,19 @@
             }
 
             if (currentDisplayPageIndex > 0) {
-                loadDisplayPage(currentDisplayPageIndex - 1, true);
+                loadDisplayPage(currentDisplayPageIndex - 1, true, { fromBack: true });
             } else if (visibleChunkCount > 1) {
                 visibleChunkCount = 1;
                 renderCurrentChunks();
+                const scene = SCENARIO[displayPages[currentDisplayPageIndex]?.sceneIndex];
+                if (scene) {
+                    const targetBgm = scene.bgm || "";
+                    if (targetBgm !== currentBgmSrc) {
+                        setBgmSource(targetBgm, { forceRestart: true });
+                    } else if (currentBgmSrc) {
+                        ensureBgmPlaying();
+                    }
+                }
                 updateNavButtons();
             }
         }

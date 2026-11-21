@@ -1,3 +1,11 @@
+const SE_DICT = {
+    "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/ashioto.mp3"
+};
+
+const BGM_DICT = {
+    "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
+};
+
 const TIPS_DICT = {
     "白雲蒼狗": {
         title: "白雲蒼狗（はくうんそうく）",
@@ -158,7 +166,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 取引",
-        text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n一礼して、老人は貴婦人に背を向けた。",
+        text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n<se 足跡>一礼して、老人は貴婦人に背を向けた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100031.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
