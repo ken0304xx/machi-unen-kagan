@@ -569,68 +569,31 @@
         function splitTextIntoChunks(rawText) {
             if (!rawText) return [];
 
-            const protectedRanges = [];
-            const protectRegex = /(\[\[.*?\]\]|<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>)/gi;
-            let bMatch;
-            while ((bMatch = protectRegex.exec(rawText)) !== null) {
-                protectedRanges.push({
-                    start: bMatch.index,
-                    end: bMatch.index + bMatch[0].length
-                });
-            }
-
-            function isProtected(idx) {
-                return protectedRanges.some(r => idx >= r.start && idx < r.end);
-            }
-
             const chunks = [];
             let start = 0;
             let i = 0;
 
             while (i < rawText.length) {
-                if (!isProtected(i)) {
-                    const ch = rawText[i];
-
-                    if (ch === "。" || ch === "？" || ch === "！" || ch === "\n") {
-                        let end = i + 1;
-
-                        while (end < rawText.length && !isProtected(end)) {
-                            const nextCh = rawText[end];
-                            if (
-                                nextCh === "。" ||
-                                nextCh === "？" ||
-                                nextCh === "！" ||
-                                nextCh === "?" ||
-                                nextCh === "!" ||
-                                nextCh === "」" ||
-                                nextCh === "』" ||
-                                nextCh === "）"
-                            ) {
-                                end++;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (end < rawText.length && rawText[end] === "\n" && !isProtected(end)) {
-                            end++;
-                        }
-
-                        const piece = rawText.slice(start, end);
-                        if (piece.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 || extractAudioTags(piece).length > 0) {
-                            chunks.push(piece);
-                        }
-                        start = end;
-                        i = end;
-                        continue;
+                if (rawText[i] === "\n") {
+                    const end = i + 1;
+                    const piece = rawText.slice(start, end);
+                    if (
+                        piece.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 ||
+                        extractAudioTags(piece).length > 0
+                    ) {
+                        chunks.push(piece);
                     }
+                    start = end;
                 }
                 i++;
             }
 
             if (start < rawText.length) {
                 const tail = rawText.slice(start);
-                if (tail.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 || extractAudioTags(tail).length > 0) {
+                if (
+                    tail.replace(/<(?:se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "").replace(/\s+/g, "").length > 0 ||
+                    extractAudioTags(tail).length > 0
+                ) {
                     chunks.push(tail);
                 }
             }
@@ -714,7 +677,6 @@
             const activeText = page.chunks.slice(0, visibleChunkCount).join("");
 
             const isAutoPageTurnPoint =
-                page.totalSubPages > 1 &&
                 visibleChunkCount === page.chunks.length &&
                 currentDisplayPageIndex < displayPages.length - 1;
 
