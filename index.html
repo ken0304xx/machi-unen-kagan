@@ -44,7 +44,7 @@
             z-index: 0;
         }
 
-        /* 20秒かけて等速（linear）で100px移動し、最後の位置で停止するアニメーション */
+        /* 40秒かけて等速（linear）で100px移動し、最後の位置で停止するアニメーション */
         @keyframes bgPanLinear {
             0% {
                 transform: translateX(0px);
@@ -106,7 +106,7 @@
             will-change: transform;
         }
         #bg-container.panning {
-            animation: bgPanLinear 20s linear forwards;
+            animation: bgPanLinear 40s linear forwards;
         }
 
         #bg-video {
