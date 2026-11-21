@@ -4,11 +4,13 @@ const SE_DICT = {
     "爆発音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/explosion.mp3",
     "女性の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/female_crying.mp3",
     "鳥の羽ばたく音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/bird_wings.mp3",
-    "カラスの鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/crow.mp3"
+    "カラスの鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/crow.mp3",
+    "鳥の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
 };
 
 const BGM_DICT = {
-    "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3"
+    "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3",
+    "もあい": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
 };
 
 const TIPS_DICT = {
@@ -192,7 +194,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "AM11:10 宮下公園付近\n老人は宮下公園のガード下まで来た。\nここには彼らの「城」があった。材質は素朴、見てくれも悪いが、中へ入ればなかなかゴージャスな生活空間だ。\n「おう、伍長」\n「早かったな、今日は」\n集まっていた仲間たちが声をかける。\n「もあい……」\n「[[入郷従郷]]」だ。ここではいつも間のびした口調になる。\n「みんな、取れ」老人は仲間に弁当を分け与えた。\n「悪いな、伍長」\n「もあい……食え。コンビニ弁当は、ここのがうまい」\n他のコンビニ弁当と大きくちがうのは当たり前だ。\nあそこのコンビニチェーンの本社食糧部料理顧問には、最近になって、元クインズホテルのシェフ大道寺謙三がついた。\n老人は若いころの彼を知っていた。",
+        text: "<SE 鳥の鳴き声>AM11:10 宮下公園付近\n老人は宮下公園のガード下まで来た。\nここには彼らの「城」があった。材質は素朴、見てくれも悪いが、中へ入ればなかなかゴージャスな生活空間だ。\n「おう、伍長」\n「早かったな、今日は」\n集まっていた仲間たちが声をかける。\n「もあい……」\n「[[入郷従郷]]」だ。ここではいつも間のびした口調になる。\n「みんな、取れ」老人は仲間に弁当を分け与えた。\n「悪いな、伍長」\n「もあい……食え。コンビニ弁当は、ここのがうまい」\n他のコンビニ弁当と大きくちがうのは当たり前だ。\nあそこのコンビニチェーンの本社食糧部料理顧問には、最近になって、元クインズホテルのシェフ大道寺謙三がついた。\n老人は若いころの彼を知っていた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100060.png",
         bgm: ""
@@ -241,7 +243,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。\nバクハ予告。\nまださっきの二人の会話がひっかかっている。\nいまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\n<SE 爆発音>サーッ、ドカーン。これで何十人が死んだ。\n<SE 爆発音>サーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
+        text: "<SE 鳥の鳴き声>PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。\nバクハ予告。\nまださっきの二人の会話がひっかかっている。\nいまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\n<SE 爆発音>サーッ、ドカーン。これで何十人が死んだ。\n<SE 爆発音>サーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: ""
@@ -269,7 +271,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "PM04:30 代々木公園周辺\n老人は代々木公園まで遠出した。\n「わは、伍長！」\nカン高い声がして、紺色のウィンドブレーカーをはおり、作業ズボンをはいた初老の男が飛び出してきた。\n「もあい……[[観音]]か」\n観音はひとなつっこい笑みを浮かべた。\n「伍長、ここ二、三日、どこ行ってたんだよ。みんな心配してたんだぜ」\n「もあい……この間の一斉でな、すみかを移したんだ」\n「まったくなあ。サツも公園管理事務所も、オレたちのことなんてほっといてくれりゃいいのによ」\n「[[杓子定規]]。役人根性だ」\n「いま、あっちで[[酔いどれ]]と一杯やってんだわ。来なよ」\n「へへ、酔いどれのヤツ、喜ぶぜ。伍長のこと、本気で心配してたからなあ」\n老人は観音の後について行った。",
+        text: "<SE 鳥の鳴き声>PM04:30 代々木公園周辺\n老人は代々木公園まで遠出した。\n「わは、伍長！」\nカン高い声がして、紺色のウィンドブレーカーをはおり、作業ズボンをはいた初老の男が飛び出してきた。\n「もあい……[[観音]]か」\n観音はひとなつっこい笑みを浮かべた。\n「伍長、ここ二、三日、どこ行ってたんだよ。みんな心配してたんだぜ」\n「もあい……この間の一斉でな、すみかを移したんだ」\n「まったくなあ。サツも公園管理事務所も、オレたちのことなんてほっといてくれりゃいいのによ」\n「[[杓子定規]]。役人根性だ」\n「いま、あっちで[[酔いどれ]]と一杯やってんだわ。来なよ」\n「へへ、酔いどれのヤツ、喜ぶぜ。伍長のこと、本気で心配してたからなあ」\n老人は観音の後について行った。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100160.png",
         bgm: ""
@@ -290,24 +292,24 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "PM05:00 代々木公園周辺\n酔いどれが潰れて、小パーティはお開きとなった。\n「[[浅酌低唱]]……忘れておった」\n別れ際に、老人はテレカを取り出して、観音に渡した。\n「おっ、ごっつあん……1、2、3」\n観音は座り直してテレカを数えた。\n「……47、48、49枚。へへ、伍長、いつもすまんなあ」\n観音は礼をいってテレカをタバコの箱にしまった。\n「もあい……利用厚生」\n「なあ伍長、いつも思うんだがよ。あんた、なんでそんなに人にやさしいんだ？」\n「ほ、ほんとうだ」酔いどれがねぼけ声で顔を上げた。「人に恵んでもらってばかりいる。まるでお釈迦さまだ」\n「もあい……[[四海兄弟]]。気にするな」\n老人は代々木公園テントを後にした。",
+        text: "PM05:00 代々木公園周辺\n酔いどれが潰れて、小パーティはお開きとなった。\n「[[浅酌低唱]]……忘れておった」\n別れ際に、老人はテレカを取り出して、観音に渡した。\n「おっ、ごっつあん……1、2、3」\n観音は座り直してテレカを数えた。\n「……47、48、49枚。へへ、伍長、いつもすまんなあ」\n観音は礼をいってテレカをタバコの箱にしまった。\n「もあい……利用厚生」\n<BGM もあい>「なあ伍長、いつも思うんだがよ。あんた、なんでそんなに人にやさしいんだ？」\n「ほ、ほんとうだ」酔いどれがねぼけ声で顔を上げた。「人に恵んでもらってばかりいる。まるでお釈迦さまだ」\n「もあい……[[四海兄弟]]。気にするな」\n老人は代々木公園テントを後にした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100190.png",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
         text: "<SE カラスの鳴き声>夕陽が赤い。\n老人は、血の色を思わせる夕焼けが、キライだった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100200.png",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
         text: "PM06:00 宮下公園付近\n「もあい……」\n老人はふとんの中で今朝の美しき貴婦人を想った。\n「[[輾転反側]]」\n老人は、その夜、寝つかれなかった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100210.png",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
         chapter: "PROLOGUE - 幕開け",
@@ -315,6 +317,6 @@ const SCENARIO = [
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100220.png",
         scroll: "none",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     }
 ];
