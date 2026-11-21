@@ -3,7 +3,8 @@ const SE_DICT = {
     "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/zatsuro.mp3",
     "爆発音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/explosion.mp3",
     "女性の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/female_crying.mp3",
-    "鳥の羽ばたく音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/bird_wings.mp3"
+    "鳥の羽ばたく音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/bird_wings.mp3",
+    "カラスの鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/crow.mp3"
 };
 
 const BGM_DICT = {
@@ -296,7 +297,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "夕陽が赤い。\n老人は、血の色を思わせる夕焼けが、キライだった。",
+        text: "<SE カラスの鳴き声>夕陽が赤い。\n老人は、血の色を思わせる夕焼けが、キライだった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100200.png",
         bgm: ""
