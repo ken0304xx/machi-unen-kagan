@@ -1,5 +1,6 @@
 const SE_DICT = {
-    "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/ashioto.mp3"
+    "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/ashioto.mp3",
+    "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/effects/zatsuro.mp3",
 };
 
 const BGM_DICT = {
@@ -180,7 +181,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "AM11:00 渋谷駅周辺\n老人は渋谷駅へ来た。\n電話の列をゆっくりと見て行く。\n使用度数の切れたテレホンカードが置き捨ててあった。絵柄はニヤけたヤサ男の写真だ。\n『「独走最善戦」好評放映中』\nテレビ番組の宣伝用テレカだった。\n老人はそれをズボンのポケットへしまった。このテレビ局「テレビ大陽」の創始者は、今は民放連の会長をやっている草薙亜紀次だ。\n老人は若いころの彼を知っていた。\n「廃品利用」\n老人は次々と不要テレカを見付けていった。\n日本で最初に『テレホンカードの構想』を唱えたのは、今は参議院議員になっている依与田伍郎だ。\n老人は若いころの彼を知っていた。",
+        text: "<SE 雑路>AM11:00 渋谷駅周辺\n老人は渋谷駅へ来た。\n電話の列をゆっくりと見て行く。\n使用度数の切れたテレホンカードが置き捨ててあった。絵柄はニヤけたヤサ男の写真だ。\n『「独走最善戦」好評放映中』\nテレビ番組の宣伝用テレカだった。\n老人はそれをズボンのポケットへしまった。このテレビ局「テレビ大陽」の創始者は、今は民放連の会長をやっている草薙亜紀次だ。\n老人は若いころの彼を知っていた。\n「廃品利用」\n老人は次々と不要テレカを見付けていった。\n日本で最初に『テレホンカードの構想』を唱えたのは、今は参議院議員になっている依与田伍郎だ。\n老人は若いころの彼を知っていた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100050.png",
         bgm: "https://actions.google.com/sounds/v1/ambiences/night_club_in_the_distance.ogg"
