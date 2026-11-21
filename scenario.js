@@ -179,6 +179,7 @@ const SCENARIO = [
         bgType: "movie",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/movies/title.mp4",
         bgFadeOut: true,
+        scroll: "none",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
     }, 
     {
