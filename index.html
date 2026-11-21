@@ -108,12 +108,24 @@
         #bg-container.panning {
             animation: bgPanLinear 40s linear forwards;
         }
+        #bg-container.no-scroll-fit {
+            width: 100%;
+            height: 100%;
+            transform: none !important;
+            animation: none !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
 
         #bg-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: none;
+        }
+        #bg-container.no-scroll-fit #bg-video {
+            object-fit: contain;
         }
 
         #bg-overlay {
@@ -655,6 +667,16 @@
             return Boolean(scene && scene.scroll === "none");
         }
 
+        function applyNoScrollFitMode(scene) {
+            if (isScrollDisabled(scene)) {
+                bgContainer.classList.add("no-scroll-fit");
+                bgContainer.classList.remove("panning");
+                bgContainer.style.transform = "";
+            } else {
+                bgContainer.classList.remove("no-scroll-fit");
+            }
+        }
+
         function stopPanAnimation() {
             bgContainer.classList.remove("panning");
             bgContainer.style.transform = "translateX(0px)";
@@ -662,9 +684,10 @@
 
         function restartPanAnimation(scene = null) {
             if (isScrollDisabled(scene)) {
-                stopPanAnimation();
+                applyNoScrollFitMode(scene);
                 return;
             }
+            bgContainer.classList.remove("no-scroll-fit");
             bgContainer.style.transform = "";
             bgContainer.classList.remove("panning");
             void bgContainer.offsetWidth;
@@ -689,6 +712,8 @@
 
         function applySceneMedia(scene, { restoreSceneBgm = false } = {}) {
             const isSameBg = (scene.bgType === lastBgType && scene.bgValue === lastBgValue);
+            const noScroll = isScrollDisabled(scene);
+            applyNoScrollFitMode(scene);
 
             if (!isSameBg) {
                 if (scene.bgType === "video" && scene.bgValue) {
@@ -703,7 +728,7 @@
                 } else if (scene.bgType === "image" && scene.bgValue) {
                     bgVideo.style.display = "none";
                     bgVideo.pause();
-                    bgContainer.style.background = "";
+                    bgContainer.style.background = noScroll ? "#050505" : "";
                     bgContainer.style.backgroundImage = `url('${scene.bgValue}')`;
                     restartPanAnimation(scene);
                 } else {
@@ -717,8 +742,12 @@
                 lastBgType = scene.bgType;
                 lastBgValue = scene.bgValue;
             } else if (scene.bgType === "image" || scene.bgType === "video") {
-                if (isScrollDisabled(scene)) {
-                    stopPanAnimation();
+                if (scene.bgType === "image" && scene.bgValue) {
+                    bgContainer.style.background = noScroll ? "#050505" : "";
+                    bgContainer.style.backgroundImage = `url('${scene.bgValue}')`;
+                }
+                if (noScroll) {
+                    applyNoScrollFitMode(scene);
                 } else if (!bgContainer.classList.contains("panning")) {
                     restartPanAnimation(scene);
                 }
