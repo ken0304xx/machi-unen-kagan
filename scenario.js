@@ -2,7 +2,8 @@ const SE_DICT = {
     "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/ashioto.mp3",
     "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/zatsuro.mp3",
     "爆発音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/explosion.mp3",
-    "女性の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/female_crying.mp3"
+    "女性の鳴き声": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/female_crying.mp3",
+    "鳥の羽ばたく音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/bird_wings.mp3"
 };
 
 const BGM_DICT = {
@@ -260,7 +261,7 @@ const SCENARIO = [
     },
     {
         chapter: "PROLOGUE - 幕開け",
-        text: "――ふと気がつくと、もう公園には誰もいなかった。\n「もあい……」\n老人は再び流れる雲を見つめた。",
+        text: "<SE 鳥の羽ばたく音>――ふと気がつくと、もう公園には誰もいなかった。\n「もあい……」\n老人は再び流れる雲を見つめた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100150.png",
         bgm: ""
