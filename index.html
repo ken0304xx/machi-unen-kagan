@@ -100,10 +100,14 @@
             width: calc(100% + 120px);
             height: 100%;
             z-index: 1;
+            opacity: 1;
             background-size: cover;
             background-position: center;
             transition: background 0.6s ease, opacity 0.6s ease;
-            will-change: transform;
+            will-change: transform, opacity;
+        }
+        #bg-container.bg-fade-out {
+            opacity: 0 !important;
         }
         #bg-container.panning {
             animation: bgPanLinear 40s linear forwards;
@@ -511,7 +515,9 @@
                     }
                 } else if (/^bgm\b/i.test(inner)) {
                     const name = inner.replace(/^bgm\s*/i, "").trim();
-                    tags.push({ type: "bgm", name });
+                    if (name) {
+                        tags.push({ type: "bgm", name });
+                    }
                 }
             }
             return tags;
@@ -710,19 +716,32 @@
             }
         }
 
+        function isMovieBgType(bgType) {
+            return bgType === "movie" || bgType === "video";
+        }
+
+        function resetBgFadeOut() {
+            bgContainer.classList.remove("bg-fade-out");
+            bgContainer.style.opacity = "1";
+        }
+
         function applySceneMedia(scene, { restoreSceneBgm = false } = {}) {
+            resetBgFadeOut();
             const isSameBg = (scene.bgType === lastBgType && scene.bgValue === lastBgValue);
             const noScroll = isScrollDisabled(scene);
+            const isMovie = isMovieBgType(scene.bgType);
             applyNoScrollFitMode(scene);
 
             if (!isSameBg) {
-                if (scene.bgType === "video" && scene.bgValue) {
+                if (isMovie && scene.bgValue) {
                     bgContainer.style.backgroundImage = "none";
                     bgContainer.style.background = "#000";
                     if (bgVideo.getAttribute("src") !== scene.bgValue) {
                         bgVideo.src = scene.bgValue;
+                        bgVideo.load();
                     }
                     bgVideo.style.display = "block";
+                    bgVideo.currentTime = 0;
                     bgVideo.play().catch(() => {});
                     restartPanAnimation(scene);
                 } else if (scene.bgType === "image" && scene.bgValue) {
@@ -741,8 +760,11 @@
 
                 lastBgType = scene.bgType;
                 lastBgValue = scene.bgValue;
-            } else if (scene.bgType === "image" || scene.bgType === "video") {
-                if (scene.bgType === "image" && scene.bgValue) {
+            } else if (isMovie || scene.bgType === "image") {
+                if (isMovie && scene.bgValue) {
+                    bgVideo.style.display = "block";
+                    bgVideo.play().catch(() => {});
+                } else if (scene.bgType === "image" && scene.bgValue) {
                     bgContainer.style.background = noScroll ? "#050505" : "";
                     bgContainer.style.backgroundImage = `url('${scene.bgValue}')`;
                 }
@@ -800,15 +822,19 @@
             nextBtn.disabled = isTipsOpen() ? false : isAtVeryEnd;
         }
 
-        function nextPage() {
-            nudgeAddressBar();
-            ensureBgmPlaying();
+        const BG_FADE_OUT_MS = 600;
+        let bgFadeOutTimer = null;
+        let isBgFadingOut = false;
 
-            if (isTipsOpen()) {
-                closeTips();
-                return;
+        function clearBgFadeOutTimer() {
+            if (bgFadeOutTimer !== null) {
+                clearTimeout(bgFadeOutTimer);
+                bgFadeOutTimer = null;
             }
+            isBgFadingOut = false;
+        }
 
+        function executeNextPageStep() {
             const page = displayPages[currentDisplayPageIndex];
             if (!page) return;
 
@@ -823,9 +849,48 @@
             }
         }
 
+        function nextPage() {
+            nudgeAddressBar();
+            ensureBgmPlaying();
+
+            if (isTipsOpen()) {
+                closeTips();
+                return;
+            }
+
+            if (isBgFadingOut) return;
+
+            const page = displayPages[currentDisplayPageIndex];
+            if (!page) return;
+
+            const isAtPageEnd = visibleChunkCount >= page.chunks.length;
+            const hasNextDisplayPage = currentDisplayPageIndex < displayPages.length - 1;
+            const scene = SCENARIO[page.sceneIndex];
+
+            if (isAtPageEnd && hasNextDisplayPage && scene && scene.bgFadeOut === true) {
+                isBgFadingOut = true;
+                prevBtn.disabled = true;
+                nextBtn.disabled = true;
+                bgContainer.classList.add("bg-fade-out");
+                bgContainer.style.opacity = "0";
+
+                bgFadeOutTimer = setTimeout(() => {
+                    bgFadeOutTimer = null;
+                    isBgFadingOut = false;
+                    loadDisplayPage(currentDisplayPageIndex + 1, true, { fromBack: false });
+                }, BG_FADE_OUT_MS);
+                return;
+            }
+
+            executeNextPageStep();
+        }
+
         function prevPage() {
             nudgeAddressBar();
             ensureBgmPlaying();
+
+            clearBgFadeOutTimer();
+            resetBgFadeOut();
 
             if (isTipsOpen()) {
                 closeTips();
@@ -908,6 +973,9 @@
         function advanceToNextScenario() {
             nudgeAddressBar();
             ensureBgmPlaying();
+
+            clearBgFadeOutTimer();
+            resetBgFadeOut();
 
             if (isTipsOpen()) {
                 closeTips();

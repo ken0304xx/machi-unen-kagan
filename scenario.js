@@ -160,175 +160,183 @@ const TIPS_DICT = {
 
 const SCENARIO = [
     {
-        chapter: "PROLOGUE - 雑踏",
+        chapter: "1日目 - 雑踏",
         text: "10月11日\nAM10:00 代々木公園周辺\nこの街にも秋が訪れようとしている。\n「もあい……天気晴朗」\n老人は小さなあくびを一つもらした。\n十月の空は青く、風は軽かった。\n老人は代々木公園のベンチに寝そべって雲を見ている。\n着ているものは、よく洗濯されてはいるが、着古した長袖シャツに、ジャンパー、ジーパンと、デニムの三点セットだ。\n白くて柔らかな髪とヒゲが、老人のワニのような顔を、ふんわりと包んでいた。\n「[[白雲蒼狗]]」\n老人は地に墜ちた雲だった。\n「うムム、[[光陰流転]]」\n晩秋の青空を流れる雲脚は速い。\n「天上風速」\n老人はもっさりと起き上がった。\n「ふわ、もあああい……！」\n老人は存分に手足を伸ばして、大好きな大あくびをした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100011.png", 
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3" 
     },
     {
-        chapter: "PROLOGUE - 依頼",
+        chapter: "1日目 - 依頼",
         text: "「あの……」\nそのとき、緑の風が吹きぬけた。\n「お隣、よろしゅうございましょうか？」\n上品な声というものはあるものだ。\n育ちのよさそうな[[老貴婦人]]が、白い日傘をさして立っている。ベンチへ座って、読書をしたいということらしい。\n「さ、[[才子佳人]]……」\n老人は呻いた。\n美しく老いた文学少女というところか。小脇に数冊の本を抱えた老貴婦人は、はにかんだように会釈した。\n「あ……[[合縁奇縁]]」\n老人は礼儀正しく立ち上がった。\n「[[仙姿玉質]]。[[一期一会]]」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100021.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
     },
     {
-        chapter: "PROLOGUE - 取引",
+        chapter: "1日目 - タイトル",
+        text: "",
+        bgType: "movie",
+        bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/movies/title.mp4",
+        bgFadeOut: true,
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
+    }, 
+    {
+        chapter: "1日目 - 取引",
         text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n<se 足跡>一礼して、老人は貴婦人に背を向けた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100031.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 違和感",
+        chapter: "1日目 - 違和感",
         text: "AM10:30 円山町周辺\n老人は[[コンビニ]]の裏手へやってきた。\n路地の奥には青いポリ容器が並んでいる。\n「[[一攫千金]]」\nポリ容器の蓋を外すと、ゴミ袋があった。\nかがみこんで、そっと袋の結び目をほどく。中には、賞味期限を過ぎた弁当やパンが詰まっている。\n老人はラベルを確認した。\n「10月10日午前10時製造」\nつまり、昨日の弁当ということだ。\n「モアイ……自給自足」\n必要な数の弁当だけ取り出し、あとはきちんと元通りにする。\n「[[安分守己]]」\n優れた釣人は一定量の魚しか採らず、賢いオオカミは一定量以上の乱獲はしない。\n老人は備えつけのホウキとチリ取りを手にすると、ポリ容器のまわりをきれいに掃除してから、一礼して、その場を立ち去った。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100040.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "<SE 雑路>AM11:00 渋谷駅周辺\n老人は渋谷駅へ来た。\n電話の列をゆっくりと見て行く。\n使用度数の切れたテレホンカードが置き捨ててあった。絵柄はニヤけたヤサ男の写真だ。\n『「独走最善戦」好評放映中』\nテレビ番組の宣伝用テレカだった。\n老人はそれをズボンのポケットへしまった。このテレビ局「テレビ大陽」の創始者は、今は民放連の会長をやっている草薙亜紀次だ。\n老人は若いころの彼を知っていた。\n「廃品利用」\n老人は次々と不要テレカを見付けていった。\n日本で最初に『テレホンカードの構想』を唱えたのは、今は参議院議員になっている依与田伍郎だ。\n老人は若いころの彼を知っていた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100050.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "AM11:10 宮下公園付近\n老人は宮下公園のガード下まで来た。\nここには彼らの「城」があった。材質は素朴、見てくれも悪いが、中へ入ればなかなかゴージャスな生活空間だ。\n「おう、伍長」\n「早かったな、今日は」\n集まっていた仲間たちが声をかける。\n「もあい……」\n「[[入郷従郷]]」だ。ここではいつも間のびした口調になる。\n「みんな、取れ」老人は仲間に弁当を分け与えた。\n「悪いな、伍長」\n「もあい……食え。コンビニ弁当は、ここのがうまい」\n他のコンビニ弁当と大きくちがうのは当たり前だ。\nあそこのコンビニチェーンの本社食糧部料理顧問には、最近になって、元クインズホテルのシェフ大道寺謙三がついた。\n老人は若いころの彼を知っていた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100060.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「全く……伍長は舌がこえてっからよ」\n一人が食いながらお世辞をいって笑った。\n「もあい……」\n老人は自分の分の弁当を取り出してひろげる。\n「それによ、何でもよく知ってらあ」\nもう一人が安酒をあおりながらいった。\n食事を終えて、老人は豊かな気持ちになった。外へ出て、いつもの愛用ベンチへごろりと横になる。\n「もあい」\n青空には雲がたなびいている。雲は老人の友達だった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100070.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 違和感",
+        chapter: "1日目 - 違和感",
         text: "<SE 雑路>AM11:40 センター街\n老人は食後の散歩に出た。\nセンター街は、渋谷の中でも特に若者の街だ。若者の街からは若者のエネルギーが吸収できる。老人はそう信じていた。老人には若いエネルギーを補給しておく必要があった。\n街は若者で溢れていた。若者たちはどれもこれも同じ顔に見えた。\n彼らの年頃、老人は国から人の命を奪うことを命じられた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100080.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 違和感",
+        chapter: "1日目 - 違和感",
         text: "ズキン。\nいきなり胸が痛んだ。気がつけば、老人は自分の胸に手を当てて立ち止まっている。\n「おじいちゃま、どうかしましたか？」\nやさしく声がかけられた。[[ハキハキとした感じの良い娘さん]]だ。\n「[[一病息災]]。いや、大丈夫です。ありがとう、お嬢さん」\nきっとこの子はイイお嫁さんになる。そして良い母となり、良い姑となるだろう。老人はふと、さっきの貴婦人を思い出していた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100090.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/musya_burui.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「――桂馬クン！」\n若い娘は突然叫んで、前の店から出て来たヘンな格好の若い男に駆け寄った。\n若い男はあわてて言い訳をしている。どういう職業か。二人は先輩後輩であるらしい。\n「そんなことより、ね、コレを見て！」\n女は急いだ様子で、男にビラのようなものを突きつけて、口早に何か説明している。\n「あはは、しおりさんもやられましたか」\n男はあっけらかんと笑った。どこか、とんちんかんなところもあるようだが、この若者はイイ目をしている。きっと何かに燃えている若者なのだろう。\n――彼らの年、老人は「愛国心」に燃えて、「敵地」に在った。\nズキン。\nまた胸に重苦しい痛みが走った。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100100.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「ええ、でもコレ、テレビドラマの宣伝にしては、ちょっと手がこみすぎていると思わない？」\n女は手にしたビラについて、何か気がかりなことでもある風だ。\n「ま、待って下サイ。っていうと、しおりさんは……」\n男は急に真顔になった。\n「ううん、別に、だからどうってことじゃないんだけど、もしかしたら、逆ってこともあるんじゃないかって」\n「逆?!」\n若者はすっとんきょうな声を出した。「ツ、ツマリ、逆に、ドラマの宣伝を装った、本モノのバクハ予告だと……?!」\nバクハ予告。おやおや、おだやかならぬ内容の会話だ。\n「ええ……だって、テレビドラマの宣伝で、ふつう、わざわざソコまでやる？」\n「まあ、そういえば」\n「たとえば桂馬クンにその[[丸めたビラ渡した人]]にしたって、ちょっとヘンだと思わない？」\n「ええ。そういえば、アイツ、かなりヘンでした」\nビラのことばかりいっている。あれが爆破予告なのだろうか。\n「私が見つけたこのビラにしたってね、貼り方がヘンだったのよ」\n「ええ、貼り方が？……どんなだったんです？」\n「コウよ」\n娘は手にしたビラを、クルリと逆さにして見せた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100110.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「え……サカサマ?!」\n若者の声がウラ返った。\n「宣伝だったら、ふつうこんな貼り方する？」\n「でも、本モノのバクハ予告ならもっとしませんよ。逆さになんて！」\n若者は一生懸命喋っている。\n「もあい……[[一目瞭然]]。ヤツは彼女にホレておる」\n老人は、なお真剣に語り合う二人をあとにして、ぶらぶらと若いエネルギー吸収のための散策を続けた。\n「[[十人十色]]。[[狂瀾怒濤]]」\n世はさまざまだ。バクダン話で恋を語る若者もいる。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100120.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "PM00:00 宮下公園付近\n老人は宮下公園へ戻った。いつものベンチは空いている。\n「[[黄粱一炊]]」\n老人はゆっくりと横になった。\nバクハ予告。\nまださっきの二人の会話がひっかかっている。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "いまは平和だ……あのころは、何の予告も前ぶれもなしに、頭上から爆弾が降って来た。\nサーッ、ドカーン。これで何十人が死んだ。\nサーッ、ドカーン。これでまた何十人が死んだ。\n敵弾も音をたてて飛んできた。\nチュンチュン。これはまだ遠い。\nチッチッチッ。これは近い。\nチッ……これは死ぬ。すべてを音だけで測った。\nあのころ、老人は恋一つ知らず、青春期を「戦地」で送った。\n――話し声がする。\n老人はうとうとしてしまったらしい。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100130.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/mugon.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "顔を上げると、学生風の二人が何やら映画論を戦わせていた。\n「[[生々流転]]」\n老人もむかし、学問を志したことがあった。\nだが、貧しい農家の七人兄弟の長男坊では、それもならず、野良仕事の合間に弟妹の面倒を見ているうち、戦争にとられた。\nちょうど彼らの年頃だった。\n「[[暴虐非道]]」\n人間はどこまでも醜く、残忍になれるものだということを、老人は彼の地で知った。\n遠い、南京という都市だ。\n五年間で、老人は三百八十余人の敵を殺した。もう六十年も昔の話だ。\n「[[行雲流水]]」\n老人は流れる雲を見つめた。\n誰かが泣いている。\n「もあい……誰だ？」\n老人は身を起こした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100136.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/mugon.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "<SE 女性の鳴き声>向こうのベンチで[[女]]が泣いている。\n「もあい……？」\nどんな事情があるのか、女はシクシクと泣いていた。\n「ぬ。なんだ、アレは？」\n老人はポカンと口をあけた。ふいに米軍兵士が現れたのだ。\nいや米兵ではない。明らかに日本人だ。[[米軍かぶれの変人]]なのだろう。いい年をして、一体どういう男だ。\n泣いている女に向かって、妙なイントネーションの片言で話しかけている。\n「ふン、[[鬼畜米英]]」\nその昔、日本はアメリカと戦争をした。「鬼畜米英」はそのときの合言葉だった。\nその前には、日本は中国とも戦争をした。老人が狩り出されたのは、その戦争だった。\n「[[阿鼻叫喚]]」\nそこは、まさに地獄絵だった。老人は二十才から五年間を地獄で暮らした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100140.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "<SE 鳥の羽ばたく音>――ふと気がつくと、もう公園には誰もいなかった。\n「もあい……」\n老人は再び流れる雲を見つめた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100150.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "PM04:30 代々木公園周辺\n老人は代々木公園まで遠出した。\n「わは、伍長！」\nカン高い声がして、紺色のウィンドブレーカーをはおり、作業ズボンをはいた初老の男が飛び出してきた。\n「もあい……[[観音]]か」\n観音はひとなつっこい笑みを浮かべた。\n「伍長、ここ二、三日、どこ行ってたんだよ。みんな心配してたんだぜ」\n「もあい……この間の一斉でな、すみかを移したんだ」\n「まったくなあ。サツも公園管理事務所も、オレたちのことなんてほっといてくれりゃいいのによ」\n「[[杓子定規]]。役人根性だ」\n「いま、あっちで[[酔いどれ]]と一杯やってんだわ。来なよ」\n「へへ、酔いどれのヤツ、喜ぶぜ。伍長のこと、本気で心配してたからなあ」\n老人は観音の後について行った。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100160.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/birds_chirping.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "代々木公園渋谷口のフェンス付近には、いくつものテントがあった。ここも彼らの「城」だった。\n中には段ボールが敷かれている。頭の禿げ上がった赤ら顔の男が、そこで酒を飲んでいた。\n「喜べ酔いどれ、伍長が来たぞ」\n「う、あ、あ、伍長ぉ……！」\n酔いどれと呼ばれた男は、真っ赤な頭をクシャクシャにした。\n三人は車座になって、酒をくみかわした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100170.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「[[羽化登仙]]」\n老人はちびちびと飲んだ。観音は愛用の三味線をかき鳴らし、酔いどれはグビグビと喉を鳴らした。\nつまみはコンビニの惣菜だ。ポテトサラダ、ひじきの煮付け、エビの天ぷら、メンチカツ、豆腐に、魚肉ソーセージ。\n「[[食前方丈]]」\nビニール袋があるのを、老人は確認した。\n「へ、へへ。心配ねーよ。買ったんだよ。ちっとばかし、並んで儲けたんだ」\n観音が笑った。\n「明日も行くんだけどさ。伍長も行かねえかい？ 神宮。半日でこんだけ出るんだよ」\n観音は指を三本立てて見せた。\n「もあい……[[精励恪勤]]」\n「なあに整理券、もらうだけの楽な仕事だからよ。面倒な手続きはオレがやってやっからさ」\n「お、お、おれは、行くぞ」\n酔いどれが赤ら顔を突き出していう。\n「え、ああ。わかってるって、いま、伍長を誘ってるんだよ」\n「な、並びは、儲かるよ、伍長」\n「もあい……心配無用。わしは行かん」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100180.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "PM05:00 代々木公園周辺\n酔いどれが潰れて、小パーティはお開きとなった。\n「[[浅酌低唱]]……忘れておった」\n別れ際に、老人はテレカを取り出して、観音に渡した。\n「おっ、ごっつあん……1、2、3」\n観音は座り直してテレカを数えた。\n「……47、48、49枚。へへ、伍長、いつもすまんなあ」\n観音は礼をいってテレカをタバコの箱にしまった。\n「もあい……利用厚生」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100190.png",
         bgm: ""
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "「なあ伍長、いつも思うんだがよ。あんた、なんでそんなに人にやさしいんだ？」\n「ほ、ほんとうだ」酔いどれがねぼけ声で顔を上げた。「人に恵んでもらってばかりいる。まるでお釈迦さまだ」\n「もあい……[[四海兄弟]]。気にするな」\n老人は代々木公園テントを後にした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100190.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "<SE カラスの鳴き声>夕陽が赤い。\n老人は、血の色を思わせる夕焼けが、キライだった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100200.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "PM06:00 宮下公園付近\n「もあい……」\n老人はふとんの中で今朝の美しき貴婦人を想った。\n「[[輾転反側]]」\n老人は、その夜、寝つかれなかった。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100210.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
     },
     {
-        chapter: "PROLOGUE - 幕開け",
+        chapter: "1日目 - 幕開け",
         text: "",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100220.png",
