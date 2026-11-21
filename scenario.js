@@ -10,7 +10,8 @@ const SE_DICT = {
 
 const BGM_DICT = {
     "陽だまり": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/hidamari.mp3",
-    "もあい": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
+    "もあい": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3",
+    "一途な想い": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
 };
 
 const TIPS_DICT = {
@@ -169,14 +170,14 @@ const SCENARIO = [
         text: "「あの……」\nそのとき、緑の風が吹きぬけた。\n「お隣、よろしゅうございましょうか？」\n上品な声というものはあるものだ。\n育ちのよさそうな[[老貴婦人]]が、白い日傘をさして立っている。ベンチへ座って、読書をしたいということらしい。\n「さ、[[才子佳人]]……」\n老人は呻いた。\n美しく老いた文学少女というところか。小脇に数冊の本を抱えた老貴婦人は、はにかんだように会釈した。\n「あ……[[合縁奇縁]]」\n老人は礼儀正しく立ち上がった。\n「[[仙姿玉質]]。[[一期一会]]」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100021.png",
-        bgm: ""
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
     },
     {
         chapter: "PROLOGUE - 取引",
         text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n<se 足跡>一礼して、老人は貴婦人に背を向けた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100031.png",
-        bgm: "025"
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/ichizu.mp3"
     },
     {
         chapter: "PROLOGUE - 違和感",
