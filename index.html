@@ -300,8 +300,8 @@
         let lastBgType = "";
         let lastBgValue = "";
 
-        // ページ内チャンク単位の発火済み管理（キー: `${pageIndex}:${chunkIndex}`）
-        const triggeredChunkKeys = new Set();
+        // BGMタグの重複発火防止用管理（キー: `${pageIndex}:${chunkIndex}`）
+        const triggeredBgmChunkKeys = new Set();
 
         const bgContainer = document.getElementById("bg-container");
         const bgVideo = document.getElementById("bg-video");
@@ -423,29 +423,32 @@
             return rawText.replace(/<(se(?:\s+[^>]+)?|bgm(?:\s+[^>]*)?)>/gi, "");
         }
 
-        function executeTagsInChunk(rawChunkText) {
+        function executeTagsInChunk(rawChunkText, { allowBgm = true } = {}) {
             const tags = extractAudioTags(rawChunkText);
             if (tags.length === 0) return;
 
-            // SEとBGMは同時再生可能なので並行実行
+            // SEは到達・再到達のたびに再生（再生終了済みなら先頭から、再生中なら重ねて再生）
+            // BGMは同時再生可能かつ重複発火を抑止
             tags.forEach((tag) => {
                 if (tag.type === "se") {
                     playSe(tag.name);
-                } else if (tag.type === "bgm") {
+                } else if (tag.type === "bgm" && allowBgm) {
                     applyBgmTag(tag.name);
                 }
             });
         }
 
-        function triggerNewlyVisibleChunks(pageIndex, fromCount, toCount) {
+        function triggerNewlyVisibleChunks(pageIndex, fromCount, toCount, { allowBgm = true } = {}) {
             const page = displayPages[pageIndex];
             if (!page) return;
 
             for (let idx = fromCount; idx < toCount; idx++) {
                 const key = `${pageIndex}:${idx}`;
-                if (triggeredChunkKeys.has(key)) continue;
-                triggeredChunkKeys.add(key);
-                executeTagsInChunk(page.chunks[idx] || "");
+                const shouldRunBgm = allowBgm && !triggeredBgmChunkKeys.has(key);
+                if (shouldRunBgm) {
+                    triggeredBgmChunkKeys.add(key);
+                }
+                executeTagsInChunk(page.chunks[idx] || "", { allowBgm: shouldRunBgm });
             }
         }
 
@@ -591,7 +594,7 @@
             textScreenEl.style.overflowY = prevOverflowY;
 
             displayPages = pages;
-            triggeredChunkKeys.clear();
+            triggeredBgmChunkKeys.clear();
 
             const targetIndex = displayPages.findIndex(p => p.sceneIndex === preserveSceneIndex);
             currentDisplayPageIndex = targetIndex >= 0 ? targetIndex : 0;
@@ -680,10 +683,11 @@
             applySceneMedia(scene, { restoreSceneBgm: fromBack });
 
             if (!fromBack) {
-                triggerNewlyVisibleChunks(currentDisplayPageIndex, 0, visibleChunkCount);
+                triggerNewlyVisibleChunks(currentDisplayPageIndex, 0, visibleChunkCount, { allowBgm: true });
             } else {
-                const key = `${currentDisplayPageIndex}:0`;
-                triggeredChunkKeys.add(key);
+                // 「戻る」操作時はSCENARIO定義BGMを基準とするためタグ由来のBGM上書きは抑止し、SEのみ再生
+                triggeredBgmChunkKeys.add(`${currentDisplayPageIndex}:0`);
+                triggerNewlyVisibleChunks(currentDisplayPageIndex, 0, visibleChunkCount, { allowBgm: false });
             }
 
             updateNavButtons();
@@ -786,16 +790,54 @@
 
         document.addEventListener("pointerdown", ensureBgmPlaying, { once: true });
 
-        // 「進む」ボタン長押しによる早送り制御
+        // 「進む」ボタン長押しによるSCENARIO単位の早送り制御
         const HOLD_DELAY_MS = 350;
-        const FAST_FORWARD_INTERVAL_MS = 120;
+        const FAST_FORWARD_INTERVAL_MS = 160;
         let holdStartTimer = null;
         let fastForwardTimer = null;
         let isFastForwarding = false;
         let suppressNextClick = false;
 
+        function getNextScenarioPageIndex() {
+            const currentPage = displayPages[currentDisplayPageIndex];
+            if (!currentPage) return -1;
+            const currentSceneIdx = currentPage.sceneIndex;
+            return displayPages.findIndex(
+                (p, idx) => idx > currentDisplayPageIndex && p.sceneIndex > currentSceneIdx
+            );
+        }
+
+        function advanceToNextScenario() {
+            nudgeAddressBar();
+            ensureBgmPlaying();
+
+            if (isTipsOpen()) {
+                closeTips();
+                return true;
+            }
+
+            const targetPageIdx = getNextScenarioPageIndex();
+            if (targetPageIdx >= 0) {
+                loadDisplayPage(targetPageIdx, true, { fromBack: false });
+                return true;
+            }
+
+            // 最後のSCENARIO内にいる場合は末尾チャンクまで進める
+            const page = displayPages[currentDisplayPageIndex];
+            if (page && visibleChunkCount < page.chunks.length) {
+                const prevCount = visibleChunkCount;
+                visibleChunkCount = page.chunks.length;
+                renderCurrentChunks();
+                triggerNewlyVisibleChunks(currentDisplayPageIndex, prevCount, visibleChunkCount, { allowBgm: true });
+                updateNavButtons();
+                return true;
+            }
+            return false;
+        }
+
         function canAdvanceNext() {
             if (isTipsOpen()) return true;
+            if (getNextScenarioPageIndex() >= 0) return true;
             const page = displayPages[currentDisplayPageIndex];
             if (!page) return false;
             const isAtVeryEnd = (
@@ -822,12 +864,19 @@
             isFastForwarding = true;
             suppressNextClick = true;
 
+            if (!advanceToNextScenario()) {
+                stopFastForward();
+                return;
+            }
+
             fastForwardTimer = setInterval(() => {
                 if (nextBtn.disabled || !canAdvanceNext()) {
                     stopFastForward();
                     return;
                 }
-                nextPage();
+                if (!advanceToNextScenario()) {
+                    stopFastForward();
+                }
             }, FAST_FORWARD_INTERVAL_MS);
         }
 
