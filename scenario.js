@@ -1,8 +1,7 @@
 const SE_DICT = {
     "足跡": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/ashioto.mp3",
     "雑路": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/zatsuro.mp3",
-    "爆発音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/explosion.mp3
-"
+    "爆発音": "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/effects/explosion.mp3"
 };
 
 const BGM_DICT = {
