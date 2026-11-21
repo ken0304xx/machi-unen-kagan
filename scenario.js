@@ -154,21 +154,21 @@ const SCENARIO = [
         text: "「あの……」\nそのとき、緑の風が吹きぬけた。\n「お隣、よろしゅうございましょうか？」\n上品な声というものはあるものだ。\n育ちのよさそうな[[老貴婦人]]が、白い日傘をさして立っている。ベンチへ座って、読書をしたいということらしい。\n「さ、[[才子佳人]]……」\n老人は呻いた。\n美しく老いた文学少女というところか。小脇に数冊の本を抱えた老貴婦人は、はにかんだように会釈した。\n「あ……[[合縁奇縁]]」\n老人は礼儀正しく立ち上がった。\n「[[仙姿玉質]]。[[一期一会]]」",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100021.png",
-        bgm: "https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg"
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
     },
     {
         chapter: "PROLOGUE - 取引",
         text: "「あら。もうお帰りに……？」\n貴婦人はちょっとあわてた様子で、\n「申し訳ございません。なんですか、わたくしが追い立ててしまったようで」\n「[[雲烟過眼]]。お気遣いなく」\n老人はピンと背筋を伸ばした。\n落胆していても、大正男のダンディズムが匂う。\n「読書は、人を出会わせても、別れさせることはありません」\n一礼して、老人は貴婦人に背を向けた。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100031.png",
-        bgm: "https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg"
+        bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/hidamari.mp3"
     },
     {
         chapter: "PROLOGUE - 違和感",
         text: "AM10:30 円山町周辺\n老人は[[コンビニ]]の裏手へやってきた。\n路地の奥には青いポリ容器が並んでいる。\n「[[一攫千金]]」\nポリ容器の蓋を外すと、ゴミ袋があった。\nかがみこんで、そっと袋の結び目をほどく。中には、賞味期限を過ぎた弁当やパンが詰まっている。\n老人はラベルを確認した。\n「10月10日午前10時製造」\nつまり、昨日の弁当ということだ。\n「モアイ……自給自足」\n必要な数の弁当だけ取り出し、あとはきちんと元通りにする。\n「[[安分守己]]」\n優れた釣人は一定量の魚しか採らず、賢いオオカミは一定量以上の乱獲はしない。\n老人は備えつけのホウキとチリ取りを手にすると、ポリ容器のまわりをきれいに掃除してから、一礼して、その場を立ち去った。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100040.png",
-        bgm: "https://actions.google.com/sounds/v1/ambiences/night_club_in_the_distance.ogg"
+        bgm: ""
     },
     {
         chapter: "PROLOGUE - 幕開け",
