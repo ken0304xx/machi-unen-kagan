@@ -306,5 +306,12 @@ const SCENARIO = [
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100210.png",
         bgm: ""
+    },
+    {
+        chapter: "PROLOGUE - 幕開け",
+        text: "",
+        bgType: "image",
+        bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100220.png",
+        bgm: ""
     }
 ];
