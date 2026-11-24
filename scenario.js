@@ -317,7 +317,7 @@ const SCENARIO = [
     },
     {
         chapter: "1日目 - 幕開け",
-        text: "「なあ伍長、いつも思うんだがよ。あんた、なんでそんなに人にやさしいんだ？」\n「ほ、ほんとうだ」酔いどれがねぼけ声で顔を上げた。「人に恵んでもらってばかりいる。まるでお釈迦さまだ」\n「もあい……[[四海兄弟]]。気にするな」\n老人は代々木公園テントを後にした。",
+        text: "「なあ伍長、いつも思うんだがよ。あんた、なんでそんなに人にやさしいんだ？」\n「ほ、ほんとうだ」酔いどれがねぼけ声で顔を上げた。「人に恵んでばかりいる。まるでお釈迦さまだ」\n「もあい……[[四海兄弟]]。気にするな」\n老人は代々木公園テントを後にした。",
         bgType: "image",
         bgValue: "https://ken0304xx.github.io/machi-unen-kagan/assets/images/100190.png",
         bgm: "https://ken0304xx.github.io/machi-unen-kagan/assets/sounds/bgm/moai.mp3"
